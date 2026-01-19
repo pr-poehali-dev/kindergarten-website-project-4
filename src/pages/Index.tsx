@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
@@ -6,6 +7,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import Icon from '@/components/ui/icon';
 
 const Index = () => {
+  const navigate = useNavigate();
   const [activeSection, setActiveSection] = useState('home');
 
   const news = [
@@ -105,8 +107,7 @@ const Index = () => {
               { id: 'news', label: 'Новости', icon: 'Newspaper' },
               { id: 'clubs', label: 'Кружки', icon: 'Stars' },
               { id: 'teachers', label: 'Педагогам', icon: 'GraduationCap' },
-              { id: 'parents', label: 'Родителям', icon: 'Users' },
-              { id: 'contacts', label: 'Контакты', icon: 'Phone' }
+              { id: 'parents', label: 'Родителям', icon: 'Users' }
             ].map((item) => (
               <Button
                 key={item.id}
@@ -119,6 +120,15 @@ const Index = () => {
                 <span className="hidden sm:inline">{item.label}</span>
               </Button>
             ))}
+            <Button
+              variant="ghost"
+              size="sm"
+              onClick={() => navigate('/contacts')}
+              className="gap-2"
+            >
+              <Icon name="Phone" size={16} />
+              <span className="hidden sm:inline">Контакты</span>
+            </Button>
           </nav>
         </div>
       </header>
@@ -137,7 +147,7 @@ const Index = () => {
                 <Icon name="Calendar" size={20} />
                 Расписание кружков
               </Button>
-              <Button size="lg" variant="outline" className="gap-2" onClick={() => scrollToSection('contacts')}>
+              <Button size="lg" variant="outline" className="gap-2" onClick={() => navigate('/contacts')}>
                 <Icon name="Phone" size={20} />
                 Связаться с нами
               </Button>
@@ -263,60 +273,7 @@ const Index = () => {
           </Card>
         </section>
 
-        <section id="contacts" className="animate-fade-in">
-          <h2 className="text-4xl font-bold mb-8 text-center">
-            <Icon name="Phone" size={32} className="inline mr-3 text-primary" />
-            Контакты
-          </h2>
-          
-          <Card className="max-w-2xl mx-auto bg-gradient-to-br from-white to-primary/5 border-2 border-primary/10">
-            <CardContent className="pt-6 space-y-6">
-              <div className="flex items-start gap-4">
-                <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0">
-                  <Icon name="MapPin" size={24} className="text-primary" />
-                </div>
-                <div>
-                  <h3 className="font-semibold mb-1">Адрес</h3>
-                  <p className="text-muted-foreground">г. Нижний Новгород, ул. Шаляпина, 25</p>
-                </div>
-              </div>
 
-              <div className="flex items-start gap-4">
-                <div className="w-12 h-12 rounded-full bg-secondary/10 flex items-center justify-center flex-shrink-0">
-                  <Icon name="Phone" size={24} className="text-secondary" />
-                </div>
-                <div>
-                  <h3 className="font-semibold mb-1">Телефон</h3>
-                  <a href="tel:+78312746311" className="text-primary hover:underline">
-                    +7 (831) 274-63-11
-                  </a>
-                </div>
-              </div>
-
-              <div className="flex items-start gap-4">
-                <div className="w-12 h-12 rounded-full bg-accent/10 flex items-center justify-center flex-shrink-0">
-                  <Icon name="Mail" size={24} className="text-accent" />
-                </div>
-                <div>
-                  <h3 className="font-semibold mb-1">Электронная почта</h3>
-                  <a href="mailto:pravoslavdetsad.nn@mail.ru" className="text-primary hover:underline">
-                    pravoslavdetsad.nn@mail.ru
-                  </a>
-                </div>
-              </div>
-
-              <div className="flex items-start gap-4">
-                <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0">
-                  <Icon name="Clock" size={24} className="text-primary" />
-                </div>
-                <div>
-                  <h3 className="font-semibold mb-1">Режим работы</h3>
-                  <p className="text-muted-foreground">Понедельник - Пятница: 6:30 - 18:30</p>
-                </div>
-              </div>
-            </CardContent>
-          </Card>
-        </section>
       </main>
 
       <footer className="bg-gradient-to-r from-primary to-secondary text-white mt-20 py-12">
